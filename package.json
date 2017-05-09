@@ -22,14 +22,14 @@
     "url": "https://bl.ocks.org/vasturiano"
   },
   "main": "build/d3-force-bounce.js",
-  "module": "index",
-  "jsnext:main": "index",
+  "module": "src/index",
+  "jsnext:main": "src/index",
   "repository": {
     "type": "git",
     "url": "https://github.com/vasturiano/d3-force-bounce.git"
   },
   "scripts": {
-    "build": "rm -rf build && mkdir build && rollup --banner \"$(preamble)\" -f umd -n d3ForceBounce -o build/d3-force-bounce.js -- index.js",
+    "build": "rm -rf build && mkdir build && rollup --banner \"$(preamble)\" -f umd -n d3ForceBounce -o build/d3-force-bounce.js -- src/index.js",
     "prepublish": "npm run build"
   },
   "dependencies": {},
