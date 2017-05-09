@@ -2,10 +2,10 @@ import constant from './constant';
 
 export default function() {
     let nodes,
-        elasticity = 1,
-        radius = (node => 1),
-        mass = (node => Math.pow(radius(node), 2)),  // Mass proportional to area by default
-        onImpact;
+        elasticity = 1,                                 // 0 <= number <= 1
+        radius = (node => 1),                           // accessor: number > 0
+        mass = (node => Math.pow(radius(node), 2)),     // accessor: number > 0 (Mass proportional to area by default)
+        onImpact;                                       // (node, node) callback
 
     function force() {
         nodes.forEach(a => {
