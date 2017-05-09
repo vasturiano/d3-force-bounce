@@ -1,1 +1,1 @@
-export {default as forceBounce} from 'src/bounce';
+export {default as forceBounce} from './src/bounce';
