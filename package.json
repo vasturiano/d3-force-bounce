@@ -29,7 +29,7 @@
     "url": "https://github.com/vasturiano/d3-force-bounce.git"
   },
   "scripts": {
-    "build": "rm -rf build && mkdir build && rollup --banner \"$(preamble)\" -f umd -n d3 -o build/d3-force-bounce.js -- index.js",
+    "build": "rm -rf build && mkdir build && rollup --banner \"$(preamble)\" -f umd -n d3ForceBounce -o build/d3-force-bounce.js -- index.js",
     "pretest": "npm run build",
     "test": "tape 'test/**/*-test.js' && eslint index.js src",
     "prepublish": "npm run test && npm run bundle && uglifyjs --preamble \"$(preamble)\" build/d3-force-bounce.js -c -m -o build/d3-force-bounce.min.js && uglifyjs --preamble \"$(preamble)\" build/d3-force-bounce.bundle.js -c -m -o build/d3-force-bounce.bundle.min.js"
