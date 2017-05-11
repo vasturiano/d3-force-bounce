@@ -8,17 +8,17 @@ export default function() {
         onImpact;                                       // (node, node) callback
 
     function force() {
-        nodes.forEach(a => {
-            nodes.filter(b => a !== b).forEach(b => {
-                const ra = radius(a),
-                    rb = radius(b),
+        nodes.forEach((a, idxA) => {
+            const ra = radius(a);
+            nodes.filter((b, idxB) => idxB > idxA).forEach(b => {
+                const rb = radius(b),
                     minDistance = ra + rb;
 
                 if (a.x === b.x && a.y === b.y) {
-                    // Totally overlap > jiggle a
+                    // Totally overlap > jiggle b
                     const jiggleVect = polar2Cart(1e-6, Math.random() * 2 * Math.PI);
-                    a.x += jiggleVect.x;
-                    a.y += jiggleVect.y;
+                    b.x += jiggleVect.x;
+                    b.y += jiggleVect.y;
                 }
 
                 const impactVect = cart2Polar(b.x-a.x, b.y-a.y), // Impact vector from a > b
