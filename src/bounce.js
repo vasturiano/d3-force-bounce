@@ -10,7 +10,7 @@ export default function() {
 
     function force() {
 
-        const tree = quadtree(nodes, d=>n.x, d=>d.y).visitAfter((quad) => {
+        const tree = quadtree(nodes, d=>d.x, d=>d.y).visitAfter((quad) => {
             if (quad.data) return quad.r = radius(quad.data);
             for (let i = quad.r = 0; i < 4; ++i) {
                 if (quad[i] && quad[i].r > quad.r) {
