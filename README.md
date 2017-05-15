@@ -1,4 +1,4 @@
-# d3-forceBounce
+# d3.forceBounce
 
 [![NPM](https://nodei.co/npm/d3-force-bounce.png?compact=true)](https://nodei.co/npm/d3-force-bounce/)
 
@@ -11,7 +11,7 @@ import d3ForceBounce from '3d-force-bounce';
 ```
 or
 ```
-var d3ForceBounce = require('3d-force-bounce');
+d3.forceBounce = require('3d-force-bounce');
 ```
 or even
 ```
@@ -21,7 +21,7 @@ then
 ```
 d3.forceSimulation()
     .nodes(<myNodes>)
-    .force('bounce', d3ForceBounce()
+    .force('bounce', d3.forceBounce()
         .radius(5)   
     );
 ```
