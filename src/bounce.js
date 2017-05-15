@@ -1,3 +1,4 @@
+import { quadtree } from 'd3-quadtree';
 import constant from './constant';
 
 export default function() {
@@ -8,41 +9,63 @@ export default function() {
         onImpact;                                       // (node, node) callback
 
     function force() {
-        nodes.forEach((a, idxA) => {
+
+        const tree = quadtree(nodes, d=>n.x, d=>d.y).visitAfter((quad) => {
+            if (quad.data) return quad.r = radius(quad.data);
+            for (let i = quad.r = 0; i < 4; ++i) {
+                if (quad[i] && quad[i].r > quad.r) {
+                    quad.r = quad[i].r; // Store largest radius per tree node
+                }
+            }
+        });
+
+        nodes.forEach(a => {
             const ra = radius(a);
-            nodes.filter((b, idxB) => idxB > idxA).forEach(b => {
-                const rb = radius(b),
+
+            tree.visit((quad, x0, y0, x1, y1) => {
+
+                const b = quad.data,
+                    rb = quad.r,
                     minDistance = ra + rb;
 
-                if (a.x === b.x && a.y === b.y) {
-                    // Totally overlap > jiggle b
-                    const jiggleVect = polar2Cart(1e-6, Math.random() * 2 * Math.PI);
-                    b.x += jiggleVect.x;
-                    b.y += jiggleVect.y;
+                if (b) { // Leaf tree node
+                    if (b.index > a.index) { // Prevent visiting same node pair more than once
+
+                        if (a.x === b.x && a.y === b.y) {
+                            // Totally overlap > jiggle b
+                            const jiggleVect = polar2Cart(1e-6, Math.random() * 2 * Math.PI);
+                            b.x += jiggleVect.x;
+                            b.y += jiggleVect.y;
+                        }
+
+                        const impactVect = cart2Polar(b.x-a.x, b.y-a.y), // Impact vector from a > b
+                            overlap = Math.max(0, minDistance - impactVect.d);
+
+                        if (!overlap) return; // No collision
+
+                        const vaRel = rotatePnt({x: a.vx, y: a.vy}, -impactVect.a), // x is the velocity along the impact line, y is tangential
+                            vbRel = rotatePnt({x: b.vx, y: b.vy}, -impactVect.a);
+
+                        // Transfer velocities along the direct line of impact (tangential remain the same)
+                        ({ a: vaRel.x, b: vbRel.x } = getAfterImpactVelocities(mass(a), mass(b), vaRel.x, vbRel.x, elasticity));
+
+                        // Convert back to original plane
+                        ({ x: a.vx, y: a.vy } = rotatePnt(vaRel, impactVect.a));
+                        ({ x: b.vx, y: b.vy } = rotatePnt(vbRel, impactVect.a));
+
+                        // Split them apart
+                        const nudge = polar2Cart(overlap, impactVect.a),
+                            nudgeBias = ra/(ra+rb); // Weight of nudge to apply to B
+                        a.x -= nudge.x * (1-nudgeBias); a.y -= nudge.y * (1-nudgeBias);
+                        b.x += nudge.x * nudgeBias; b.y += nudge.y * nudgeBias;
+
+                        onImpact && onImpact(a, b);
+                    }
+                    return;
                 }
 
-                const impactVect = cart2Polar(b.x-a.x, b.y-a.y), // Impact vector from a > b
-                    overlap = Math.max(0, minDistance - impactVect.d);
-
-                if (!overlap) return; // No collision
-
-                const vaRel = rotatePnt({x: a.vx, y: a.vy}, -impactVect.a), // x is the velocity along the impact line, y is tangential
-                    vbRel = rotatePnt({x: b.vx, y: b.vy}, -impactVect.a);
-
-                // Transfer velocities along the direct line of impact (tangential remain the same)
-                ({ a: vaRel.x, b: vbRel.x } = getAfterImpactVelocities(mass(a), mass(b), vaRel.x, vbRel.x, elasticity));
-
-                // Convert back to original plane
-                ({ x: a.vx, y: a.vy } = rotatePnt(vaRel, impactVect.a));
-                ({ x: b.vx, y: b.vy } = rotatePnt(vbRel, impactVect.a));
-
-                // Split them apart
-                const nudge = polar2Cart(overlap, impactVect.a),
-                    nudgeBias = ra/(ra+rb); // Weight of nudge to apply to B
-                a.x -= nudge.x * (1-nudgeBias); a.y -= nudge.y * (1-nudgeBias);
-                b.x += nudge.x * nudgeBias; b.y += nudge.y * nudgeBias;
-
-                onImpact && onImpact(a, b);
+                // Only keep traversing sub-tree quadrants if radius overlaps
+                return x0 > a.x + minDistance || x1 < a.x - minDistance || y0 > a.y + minDistance || y1 < a.y - minDistance;
             });
         });
 
