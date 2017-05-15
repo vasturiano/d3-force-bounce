@@ -1,1 +1,1 @@
-export {default} from './bounce';
+export { default as forceBounce } from './bounce';
