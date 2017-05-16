@@ -10,6 +10,7 @@ Here's a [visual comparison](https://bl.ocks.org/vasturiano/ea5f3488bf649fa3a556
 
 It can be used, for example to [simulate particle collisions](https://bl.ocks.org/vasturiano/2992bcb530bc2d64519c5b25201492fd) or in a [Newton's cradle](https://bl.ocks.org/vasturiano/0a05e58d5122cde888793c374d587aac).
 
+See also [d3.forceSurface](https://github.com/vasturiano/d3-force-surface).
 
 ## Quick start
 
