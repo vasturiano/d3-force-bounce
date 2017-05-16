@@ -4,6 +4,13 @@
 
 An elastic collision force type for the d3-force simulation engine.
 
+This force is similar to [d3.forceCollide](https://github.com/d3/d3-force#forceCollide), but allows for fully elastic collisions that [conserve kinetic energy](https://en.wikipedia.org/wiki/Momentum#Elastic_collisions). This makes <i>d3.forceCollide</i> appropriate for preventing the overlap of nodes, and <i>d3.forceBounce</i> better suited when the intent is to achieve an elastic collision effect, with varying degrees of elasticity (coefficient of restitution).
+
+Here's a [visual comparison](https://bl.ocks.org/vasturiano/ea5f3488bf649fa3a5567dbaef7bfe17) between the two forces.
+
+It can be used, for example to [simulate particle collisions](https://bl.ocks.org/vasturiano/2992bcb530bc2d64519c5b25201492fd) or in a [Newton's cradle](https://bl.ocks.org/vasturiano/0a05e58d5122cde888793c374d587aac).
+
+
 ## Quick start
 
 ```
