@@ -42,10 +42,3 @@ d3.forceSimulation()
 | <b>radius</b>([<i>num</i> or <i>fn</i>]) | Getter/setter for the node object radius accessor function (`fn(node)`) or a constant (`num`) for all nodes. | 1 |
 | <b>mass</b>([<i>num</i> or <i>fn</i>]) | Getter/setter for the node object mass accessor function (`fn(node)`) or a constant (`num`) for all nodes. Mass affects the symmetry of the energy transfer between two colliding nodes. By default it is proportional to the node's area. | `Math.pow(radius(node), 2)` |
 | <b>onImpact</b>([<i>fn</i>]) | Callback function triggered at every collision, with the signature `onImpact(node1, node2)`  ||
-
-## Local development
-
-```
-npm install
-npm run watch
-```
