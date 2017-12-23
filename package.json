@@ -23,7 +23,7 @@
   },
   "unpkg": "dist/d3-force-bounce.min.js",
   "main": "dist/d3-force-bounce.common.js",
-  "module": "dist/d3-force-bounce.mjs",
+  "module": "dist/d3-force-bounce.module.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/vasturiano/d3-force-bounce.git"
