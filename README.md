@@ -3,7 +3,7 @@ d3.forceBounce
 
 [![NPM package][npm-img]][npm-url]
 [![Build Size][build-size-img]][build-size-url]
-[![Dependencies][dependencies-img]][dependencies-url]
+[![NPM Downloads][npm-downloads-img]][npm-downloads-url]
 
 An elastic collision force type for the d3-force simulation engine.
 
@@ -17,19 +17,19 @@ See also [d3.forceSurface](https://github.com/vasturiano/d3-force-surface).
 
 ## Quick start
 
-```
+```js
 import d3ForceBounce from 'd3-force-bounce';
 ```
 or
-```
+```js
 d3.forceBounce = require('d3-force-bounce');
 ```
 or even
-```
+```html
 <script src="//unpkg.com/d3-force-bounce/dist/d3-force-bounce.min.js"></script>
 ```
 then
-```
+```js
 d3.forceSimulation()
     .nodes(<myNodes>)
     .force('bounce', d3.forceBounce()
@@ -51,9 +51,9 @@ d3.forceSimulation()
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=L398E7PKP47E8&currency_code=USD&source=url) If this project has helped you and you'd like to contribute back, you can always [buy me a ☕](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=L398E7PKP47E8&currency_code=USD&source=url)!
 
 
-[npm-img]: https://img.shields.io/npm/v/d3-force-bounce.svg
+[npm-img]: https://img.shields.io/npm/v/d3-force-bounce
 [npm-url]: https://npmjs.org/package/d3-force-bounce
-[build-size-img]: https://img.shields.io/bundlephobia/minzip/d3-force-bounce.svg
+[build-size-img]: https://img.shields.io/bundlephobia/minzip/d3-force-bounce
 [build-size-url]: https://bundlephobia.com/result?p=d3-force-bounce
-[dependencies-img]: https://img.shields.io/david/vasturiano/d3-force-bounce.svg
-[dependencies-url]: https://david-dm.org/vasturiano/d3-force-bounce
+[npm-downloads-img]: https://img.shields.io/npm/dt/d3-force-bounce
+[npm-downloads-url]: https://www.npmtrends.com/d3-force-bounce
