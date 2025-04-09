@@ -1,6 +1,6 @@
 {
   "name": "d3-force-bounce",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "An elastic collision force type for the d3-force simulation engine.",
   "keywords": [
     "d3",
