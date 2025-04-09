@@ -22,7 +22,7 @@ import d3ForceBounce from 'd3-force-bounce';
 ```
 or using a *script* tag
 ```html
-<script src="//unpkg.com/d3-force-bounce/dist/d3-force-bounce.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/d3-force-bounce"></script>
 ```
 then
 ```js

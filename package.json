@@ -22,6 +22,7 @@
     "url": "https://github.com/vasturiano"
   },
   "type": "module",
+  "jsdelivr": "dist/d3-force-bounce.min.js",
   "unpkg": "dist/d3-force-bounce.min.js",
   "main": "dist/d3-force-bounce.mjs",
   "module": "dist/d3-force-bounce.mjs",
